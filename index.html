@@ -2,76 +2,21 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Landing</title>
+
+<!-- 🚀 CHUYỂN NGAY TRƯỚC KHI RENDER -->
+<script>
+window.location.replace("https://shopee.vn");
+</script>
+
+<!-- backup -->
+<meta http-equiv="refresh" content="0; url=https://shopee.vn">
+
+<title>Redirect</title>
 
 <style>
-body{
-  margin:0;
-  background:#000;
-  font-family:sans-serif;
-}
-
-/* 🔥 OVERLAY FULL */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at top,#1a1a1a,#000);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-/* 💎 CARD */
-.card{
-  width:90%;
-  max-width:400px;
-  background:linear-gradient(145deg,#111,#1c1c1c);
-  border-radius:20px;
-  padding:25px;
-  text-align:center;
-  box-shadow:0 0 40px rgba(0,0,0,0.8);
-  animation:zoomIn 0.4s ease;
-}
-
-/* 🎬 THUMBNAIL */
-.thumb{
-  width:100%;
-  border-radius:15px;
-  margin-bottom:15px;
-  box-shadow:0 0 20px rgba(0,0,0,0.6);
-}
-
-/* TEXT */
-.card h2{
-  color:#fff;
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.card p{
-  color:#bbb;
-  font-size:14px;
-  line-height:1.5;
-}
-
-/* BUTTON */
-.btn{
-  display:block;
-  margin-top:15px;
-  padding:12px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:bold;
-  color:white;
-  background:linear-gradient(90deg,#ff6b6b,#ff0000);
-  box-shadow:0 5px 20px rgba(255,0,0,0.4);
-}
-
-/* ANIMATION */
-@keyframes zoomIn{
-  from{transform:scale(0.8);opacity:0;}
-  to{transform:scale(1);opacity:1;}
+/* ❌ KHÔNG CHO RENDER GÌ */
+html, body {
+  display: none;
 }
 </style>
 
@@ -79,29 +24,9 @@ body{
 
 <body>
 
-<!-- 🔥 POPUP CHE TOÀN BỘ -->
-<div class="overlay">
-
-  <div class="card">
-
-    <img class="thumb"
-    src="https://img.youtube.com/vi/g9cQTE4t5cI/maxresdefault.jpg">
-
-    <h2>🎬 Xem phim full HD</h2>
-
-    <p>
-      👉 Ghé Shopee 1 chút để ủng hộ shop<br>
-      (không cần mua hàng)<br><br>
-
-      ⏳ Sau đó quay lại bạn sẽ xem được phim
-    </p>
-
-    <a href="https://shopee.vn" target="_blank" class="btn">
-      🚀 Tiếp tục
-    </a>
-
-  </div>
-
+<div class="container">
+  <h1>🎬 Test ảnh YouTube</h1>
+  <img src="https://img.youtube.com/vi/g9cQTE4t5cI/maxresdefault.jpg">
 </div>
 
 </body>
