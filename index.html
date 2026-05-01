@@ -11,10 +11,9 @@ body{margin:0;background:#000;font-family:sans-serif;}
   position:relative;
   width:100%;
   height:100vh;
-  overflow:hidden;
 }
 
-/* iframe */
+/* video */
 .video iframe{
   position:absolute;
   top:0;
@@ -22,47 +21,34 @@ body{margin:0;background:#000;font-family:sans-serif;}
   width:100%;
   height:100%;
   border:0;
-  pointer-events:none; /* chặn click YouTube */
 }
 
-/* overlay */
+/* lớp click */
+.click-layer{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:5;
+}
+
+/* nút */
 .overlay{
   position:absolute;
   bottom:30px;
   width:100%;
   text-align:center;
+  z-index:10;
 }
 
-/* nút */
 .btn{
-  display:inline-block;
-  margin:10px;
-  padding:15px 25px;
+  background:red;
+  color:white;
+  padding:15px 30px;
   border-radius:30px;
   text-decoration:none;
   font-weight:bold;
-  font-size:16px;
-}
-
-.buy{
-  background:red;
-  color:white;
-}
-
-.sound{
-  background:#222;
-  color:white;
-}
-
-/* hiệu ứng */
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
-}
-
-.buy{
-  animation:pulse 1.5s infinite;
 }
 </style>
 </head>
@@ -72,45 +58,48 @@ body{margin:0;background:#000;font-family:sans-serif;}
 <div class="video">
 
   <!-- VIDEO -->
-  <iframe id="videoFrame"
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
+  <iframe
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0"
     allow="autoplay"
     allowfullscreen>
   </iframe>
 
-  <!-- BUTTON -->
+  <!-- CLICK 1 LẦN -->
+  <a id="clickLayer" href="#" class="click-layer"></a>
+
+  <!-- NÚT -->
   <div class="overlay">
-    <a href="https://shopee.vn" class="btn buy" target="_blank">
+    <a href="https://shopee.vn" target="_blank" class="btn">
       🔥 MUA NGAY
     </a>
-
-    <button class="btn sound" onclick="unmuteVideo()">
-      🔊 Bật tiếng
-    </button>
   </div>
 
 </div>
 
 <script>
-// 👉 bật tiếng
-function unmuteVideo(){
-  let iframe = document.getElementById("videoFrame");
-  iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=1";
+const SHOPEE_LINK = "https://shopee.vn";
+
+// kiểm tra đã click chưa
+let clicked = localStorage.getItem("clicked_once");
+
+// nếu chưa click → bật lớp click
+if(!clicked){
+  let layer = document.getElementById("clickLayer");
+
+  layer.addEventListener("click", function(e){
+    e.preventDefault();
+
+    // lưu trạng thái đã click
+    localStorage.setItem("clicked_once", "true");
+
+    // mở link
+    window.location.href = SHOPEE_LINK;
+  });
+
+}else{
+  // đã click rồi → tắt lớp click
+  document.getElementById("clickLayer").style.display = "none";
 }
-
-// 👉 auto redirect random 12–30s
-window.onload = function(){
-  let delay = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
-  console.log("Redirect sau:", delay);
-
-  let start = Date.now();
-  let timer = setInterval(function(){
-    if(Date.now() - start >= delay){
-      window.location.href = "https://shopee.vn";
-      clearInterval(timer);
-    }
-  }, 500);
-};
 </script>
 
 </body>
