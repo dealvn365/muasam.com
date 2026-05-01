@@ -2,34 +2,21 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Test Ảnh GitHub</title>
 
-<!-- 🚀 CHUYỂN NGAY -->
-<meta http-equiv="refresh" content="0; url=https://shopee.vn">
-
+<!-- 🚀 CHUYỂN NGAY TRƯỚC KHI RENDER -->
 <script>
-// backup JS (tránh bị chặn meta)
 window.location.replace("https://shopee.vn");
 </script>
 
+<!-- backup -->
+<meta http-equiv="refresh" content="0; url=https://shopee.vn">
+
+<title>Redirect</title>
+
 <style>
-body{
-  margin:0;
-  background:#000;
-  color:white;
-  font-family:sans-serif;
-  text-align:center;
-}
-
-.container{
-  padding:30px;
-}
-
-img{
-  width:90%;
-  max-width:800px;
-  border-radius:15px;
-  box-shadow:0 0 30px rgba(0,0,0,0.6);
+/* ❌ KHÔNG CHO RENDER GÌ */
+html, body {
+  display: none;
 }
 </style>
 
@@ -39,7 +26,6 @@ img{
 
 <div class="container">
   <h1>🎬 Test ảnh YouTube</h1>
-
   <img src="https://img.youtube.com/vi/g9cQTE4t5cI/maxresdefault.jpg">
 </div>
 
