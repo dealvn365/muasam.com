@@ -2,104 +2,148 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Landing Video</title>
+<title>Landing Pro</title>
 
 <style>
-body{margin:0;background:#000;font-family:sans-serif;}
-
-.video{
-  position:relative;
-  width:100%;
-  height:100vh;
+body{
+  margin:0;
+  background:#000;
+  font-family:sans-serif;
+  color:white;
 }
 
-/* video */
-.video iframe{
-  position:absolute;
-  top:0;
-  left:0;
+/* VIDEO NỀN */
+.bg iframe{
+  position:fixed;
+  top:0;left:0;
   width:100%;
   height:100%;
   border:0;
+  z-index:1;
+  pointer-events:none;
 }
 
-/* lớp click */
-.click-layer{
-  position:absolute;
-  top:0;
-  left:0;
+/* POPUP */
+.popup{
+  position:fixed;
+  top:0;left:0;
   width:100%;
   height:100%;
-  z-index:5;
-}
-
-/* nút */
-.overlay{
-  position:absolute;
-  bottom:30px;
-  width:100%;
-  text-align:center;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
   z-index:10;
 }
 
+.box{
+  background:#111;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  max-width:320px;
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
+}
+
+.box p{
+  font-size:15px;
+}
+
+/* BUTTON */
 .btn{
-  background:red;
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 25px;
+  background:linear-gradient(90deg,#ff6b6b,#ff3d3d);
   color:white;
-  padding:15px 30px;
   border-radius:30px;
   text-decoration:none;
   font-weight:bold;
+  box-shadow:0 5px 20px rgba(255,0,0,0.4);
+}
+
+/* CARD VIDEO */
+.card{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:280px;
+  background:#111;
+  border-radius:15px;
+  overflow:hidden;
+  display:none;
+  z-index:9;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+  animation:fadeIn 0.5s ease;
+}
+
+.card iframe{
+  width:100%;
+  height:160px;
+  border:0;
+}
+
+.card p{
+  padding:10px;
+  font-size:14px;
+}
+
+/* animation */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="video">
+<!-- VIDEO NỀN -->
+<div class="bg">
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0"></iframe>
+</div>
 
-  <!-- VIDEO -->
-  <iframe
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
-
-  <!-- CLICK 1 LẦN -->
-  <a id="clickLayer" href="#" class="click-layer"></a>
-
-  <!-- NÚT -->
-  <div class="overlay">
-    <a href="https://shopee.vn" target="_blank" class="btn">
-      🔥 MUA NGAY
+<!-- POPUP SHOPEE -->
+<div class="popup" id="popup">
+  <div class="box">
+    <p>🙏 Vui lòng nhấn vào Shopee để ủng hộ shop<br>(không cần mua hàng)</p>
+    <a href="https://shopee.vn" class="btn" target="_blank" onclick="clickShopee()">
+      Đi Shopee
     </a>
   </div>
+</div>
 
+<!-- CARD VIDEO -->
+<div class="card" id="card">
+  <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1"></iframe>
+  <p>🎬 Video hấp dẫn – Xem ngay</p>
 </div>
 
 <script>
-const SHOPEE_LINK = "https://shopee.vn";
 
 // kiểm tra đã click chưa
-let clicked = localStorage.getItem("clicked_once");
+let done = localStorage.getItem("clicked_shopee");
 
-// nếu chưa click → bật lớp click
-if(!clicked){
-  let layer = document.getElementById("clickLayer");
-
-  layer.addEventListener("click", function(e){
-    e.preventDefault();
-
-    // lưu trạng thái đã click
-    localStorage.setItem("clicked_once", "true");
-
-    // mở link
-    window.location.href = SHOPEE_LINK;
-  });
-
-}else{
-  // đã click rồi → tắt lớp click
-  document.getElementById("clickLayer").style.display = "none";
+// nếu đã click → không hiện popup
+if(done){
+  document.getElementById("popup").style.display = "none";
+  showCard();
 }
+
+// khi click Shopee
+function clickShopee(){
+  localStorage.setItem("clicked_shopee","true");
+
+  // sau 10s hiện card
+  setTimeout(showCard,10000);
+}
+
+// hiện card
+function showCard(){
+  document.getElementById("card").style.display = "block";
+}
+
 </script>
 
 </body>
