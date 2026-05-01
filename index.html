@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Landing Clean</title>
+<title>Landing Force</title>
 
 <style>
 body{
@@ -43,7 +43,7 @@ body{
   font-weight:bold;
 }
 
-/* CARD VIDEO FULL */
+/* CARD VIDEO */
 .card{
   position:fixed;
   top:5%;
@@ -65,7 +65,7 @@ body{
   border:0;
 }
 
-/* NÚT ĐÓNG */
+/* CLOSE */
 .close{
   position:absolute;
   top:10px;
@@ -81,7 +81,6 @@ body{
   font-size:18px;
 }
 
-/* hiệu ứng */
 @keyframes fadeIn{
   from{opacity:0; transform:scale(.9);}
   to{opacity:1; transform:scale(1);}
@@ -95,12 +94,12 @@ body{
 <!-- POPUP -->
 <div class="popup" id="popup">
   <div class="box">
-    <p>🙏 Nhấn vào Shopee để ủng hộ shop<br>(không cần mua)</p>
-    <button class="btn" onclick="goShopee()">Đi Shopee</button>
+    <p>🙏 Nhấn vào Shopee để tiếp tục<br>(không cần mua)</p>
+    <button class="btn" onclick="goShopee()">Tiếp tục</button>
   </div>
 </div>
 
-<!-- CARD VIDEO -->
+<!-- VIDEO -->
 <div class="card" id="card">
 
   <button class="close" onclick="closeCard()">✖</button>
@@ -115,15 +114,10 @@ body{
 
 <script>
 
-// nếu đã click trước đó → không hiện popup
-if(localStorage.getItem("clicked")){
-  document.getElementById("popup").style.display="none";
-  showCard();
-}
+// luôn hiện popup (không lưu gì)
 
 // click Shopee
 function goShopee(){
-  localStorage.setItem("clicked","true");
 
   // mở Shopee
   window.open("https://shopee.vn","_blank");
@@ -131,16 +125,13 @@ function goShopee(){
   // ẩn popup
   document.getElementById("popup").style.display="none";
 
-  // sau 5s hiện video
-  setTimeout(showCard,5000);
+  // 5s sau mới cho xem video
+  setTimeout(()=>{
+    document.getElementById("card").style.display="block";
+  },5000);
 }
 
-// hiện card
-function showCard(){
-  document.getElementById("card").style.display="block";
-}
-
-// đóng card
+// đóng video
 function closeCard(){
   document.getElementById("card").style.display="none";
 }
