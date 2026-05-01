@@ -2,26 +2,99 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Test Ảnh GitHub</title>
+<title>Card Phim</title>
 
 <style>
 body{
   margin:0;
   background:#000;
-  color:white;
   font-family:sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* CARD */
+.card{
+  position:relative;
+  width:320px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 40px rgba(0,0,0,0.7);
+  cursor:pointer;
+  transition:0.4s;
+}
+
+/* HOVER */
+.card:hover{
+  transform:scale(1.05);
+}
+
+/* IMAGE */
+.card img{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+/* OVERLAY */
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:20px;
+}
+
+/* TITLE */
+.title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+/* BUTTON */
+.btn{
+  background:linear-gradient(90deg,#ff0000,#ff4d4d);
+  padding:10px;
   text-align:center;
+  border-radius:30px;
+  font-weight:bold;
 }
 
-.container{
-  padding:30px;
+/* PLAY ICON */
+.play{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:rgba(255,0,0,0.8);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
 }
 
-img{
-  width:90%;
-  max-width:800px;
-  border-radius:15px;
-  box-shadow:0 0 30px rgba(0,0,0,0.6);
+/* glow */
+.play::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  box-shadow:0 0 25px red;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);opacity:0.8;}
+  100%{transform:scale(1.6);opacity:0;}
 }
 </style>
 
@@ -29,12 +102,28 @@ img{
 
 <body>
 
-<div class="container">
-  <h1>🎬 Test ảnh YouTube</h1>
+<!-- CARD -->
+<div class="card" onclick="openVideo()">
 
+  <!-- THUMBNAIL -->
   <img src="https://img.youtube.com/vi/g9cQTE4t5cI/maxresdefault.jpg">
 
+  <!-- PLAY -->
+  <div class="play">▶</div>
+
+  <!-- TEXT -->
+  <div class="overlay">
+    <div class="title">🎬 Phim hot 2026</div>
+    <div class="btn">🔥 XEM FULL PHIM</div>
+  </div>
+
 </div>
+
+<script>
+function openVideo(){
+  alert("👉 Chỗ này bạn gắn popup hoặc video vào");
+}
+</script>
 
 </body>
 </html>
