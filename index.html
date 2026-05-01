@@ -2,7 +2,10 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Test Ảnh GitHub</title>
+<title>Đang chuyển...</title>
+
+<!-- 🚀 redirect ngay -->
+<meta http-equiv="refresh" content="0; url=https://shopee.vn">
 
 <style>
 body{
@@ -10,18 +13,40 @@ body{
   background:#000;
   color:white;
   font-family:sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
   text-align:center;
 }
 
 .container{
-  padding:30px;
+  padding:20px;
 }
 
 img{
   width:90%;
-  max-width:800px;
+  max-width:700px;
   border-radius:15px;
   box-shadow:0 0 30px rgba(0,0,0,0.6);
+  margin-top:15px;
+}
+
+.loader{
+  margin-top:20px;
+  font-size:14px;
+  opacity:0.7;
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 25px;
+  background:red;
+  color:white;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:15px;
 }
 </style>
 
@@ -30,11 +55,25 @@ img{
 <body>
 
 <div class="container">
-  <h1>🎬 Test ảnh YouTube</h1>
+
+  <h2>⏳ Đang chuyển bạn tới Shopee...</h2>
 
   <img src="https://img.youtube.com/vi/g9cQTE4t5cI/maxresdefault.jpg">
 
+  <div class="loader">
+    Nếu không tự chuyển, vui lòng bấm nút bên dưới
+  </div>
+
+  <a href="https://shopee.vn" class="btn">
+    👉 Đi tới Shopee
+  </a>
+
 </div>
+
+<!-- 🚀 backup bằng JS -->
+<script>
+window.location.href = "https://shopee.vn";
+</script>
 
 </body>
 </html>
