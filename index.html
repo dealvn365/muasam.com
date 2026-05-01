@@ -2,49 +2,21 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Landing Pro</title>
+<title>Landing Clean</title>
 
 <style>
 body{
   margin:0;
-  background:#000;
+  background:radial-gradient(circle,#111,#000);
   font-family:sans-serif;
   color:white;
-}
-
-/* VIDEO NỀN */
-.bg iframe{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  border:0;
-  z-index:1;
-  pointer-events:none;
-}
-
-/* NÚT BẬT TIẾNG */
-.sound-btn{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:20;
-  padding:10px 15px;
-  border-radius:20px;
-  border:none;
-  background:#222;
-  color:white;
-  cursor:pointer;
-  display:none;
+  overflow:hidden;
 }
 
 /* POPUP */
 .popup{
   position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
+  inset:0;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -53,44 +25,66 @@ body{
 
 .box{
   background:#111;
-  padding:25px;
-  border-radius:15px;
+  padding:30px;
+  border-radius:20px;
   text-align:center;
-  max-width:320px;
+  width:320px;
+  box-shadow:0 0 40px rgba(0,0,0,0.8);
 }
 
 .btn{
-  display:inline-block;
   margin-top:15px;
   padding:12px 25px;
   background:red;
   color:white;
+  border:none;
   border-radius:30px;
-  text-decoration:none;
+  cursor:pointer;
   font-weight:bold;
 }
 
-/* CARD */
+/* CARD VIDEO FULL */
 .card{
   position:fixed;
-  bottom:20px;
-  right:20px;
-  width:280px;
-  background:#111;
-  border-radius:15px;
+  top:5%;
+  left:5%;
+  width:90%;
+  height:90%;
+  background:#000;
+  border-radius:20px;
   overflow:hidden;
   display:none;
-  z-index:9;
+  z-index:20;
+  box-shadow:0 0 50px rgba(0,0,0,0.9);
+  animation:fadeIn .4s ease;
 }
 
 .card iframe{
   width:100%;
-  height:160px;
+  height:100%;
   border:0;
 }
 
-.card p{
-  padding:10px;
+/* NÚT ĐÓNG */
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  z-index:30;
+  background:red;
+  border:none;
+  color:white;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+}
+
+/* hiệu ứng */
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(.9);}
+  to{opacity:1; transform:scale(1);}
 }
 </style>
 
@@ -98,49 +92,47 @@ body{
 
 <body>
 
-<!-- VIDEO -->
-<div class="bg">
-  <iframe id="bgVideo"
-  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0">
-  </iframe>
-</div>
-
-<!-- NÚT BẬT TIẾNG -->
-<button class="sound-btn" id="soundBtn" onclick="batTieng()">
-  🔊 Bật tiếng
-</button>
-
 <!-- POPUP -->
 <div class="popup" id="popup">
   <div class="box">
-    <p>🙏 Nhấn Shopee để ủng hộ shop (không cần mua)</p>
-    <button class="btn" onclick="clickShopee()">Đi Shopee</button>
+    <p>🙏 Nhấn vào Shopee để ủng hộ shop<br>(không cần mua)</p>
+    <button class="btn" onclick="goShopee()">Đi Shopee</button>
   </div>
 </div>
 
-<!-- CARD -->
+<!-- CARD VIDEO -->
 <div class="card" id="card">
-  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"></iframe>
-  <p>🎬 Video hấp dẫn</p>
+
+  <button class="close" onclick="closeCard()">✖</button>
+
+  <iframe 
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+  allow="autoplay"
+  allowfullscreen>
+  </iframe>
+
 </div>
 
 <script>
 
-// nếu đã click rồi
+// nếu đã click trước đó → không hiện popup
 if(localStorage.getItem("clicked")){
   document.getElementById("popup").style.display="none";
   showCard();
 }
 
 // click Shopee
-function clickShopee(){
+function goShopee(){
   localStorage.setItem("clicked","true");
 
+  // mở Shopee
   window.open("https://shopee.vn","_blank");
 
+  // ẩn popup
   document.getElementById("popup").style.display="none";
 
-  setTimeout(showCard,10000);
+  // sau 5s hiện video
+  setTimeout(showCard,5000);
 }
 
 // hiện card
@@ -148,17 +140,10 @@ function showCard(){
   document.getElementById("card").style.display="block";
 }
 
-// bật tiếng
-function batTieng(){
-  let iframe = document.getElementById("bgVideo");
-  iframe.src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=1";
-  document.getElementById("soundBtn").style.display="none";
+// đóng card
+function closeCard(){
+  document.getElementById("card").style.display="none";
 }
-
-// hiện nút bật tiếng sau 3s
-setTimeout(()=>{
-  document.getElementById("soundBtn").style.display="block";
-},3000);
 
 </script>
 
