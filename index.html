@@ -1,19 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-<meta charset="utf-8">
-<title>muasam.com</title>
+<meta charset="UTF-8">
+<title>🎬 Xem phim full miễn phí</title>
 
-<!-- 🔥 THÊM ĐOẠN NÀY -->
+<!-- 🔥 FACEBOOK PREVIEW -->
 <meta property="og:title" content="🎬 Xem phim full miễn phí">
 <meta property="og:description" content="🔥 Click để xem phim cực hay">
-<meta property="og:image" content="https://github.com/dealvn365/muasam.com/blob/main/android-192x192.png">
+<meta property="og:image" content="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://dealvn365.github.io/muasam/">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
-<!-- favicon -->
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<style>
+body{
+  margin:0;
+  background:radial-gradient(circle,#111,#000);
+  font-family:sans-serif;
+  color:white;
+}
 
-<meta name="theme-color" content="#667eea">
-<link rel="stylesheet" href="style.css">
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+
+.box{
+  background:#111;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:320px;
+  box-shadow:0 0 30px rgba(0,0,0,0.6);
+}
+
+/* BUTTON */
+.btn{
+  margin-top:15px;
+  padding:12px 25px;
+  background:linear-gradient(90deg,#ff4d4d,#ff0000);
+  color:white;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* CARD VIDEO FULL */
+.card{
+  position:fixed;
+  top:5%;
+  left:5%;
+  width:90%;
+  height:90%;
+  background:#000;
+  border-radius:20px;
+  display:none;
+  z-index:20;
+  overflow:hidden;
+}
+
+/* VIDEO */
+.video-wrap{
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+.video-wrap iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* PLAY BUTTON */
+.play-btn{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:24px;
+  padding:15px 30px;
+  background:red;
+  border:none;
+  border-radius:30px;
+  color:white;
+  cursor:pointer;
+  z-index:5;
+}
+
+/* CLOSE */
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  z-index:30;
+  background:red;
+  border:none;
+  color:white;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  cursor:pointer;
+}
+</style>
+
 </head>
+
+<body>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="box">
+    <p>
+      🙏 Ghé Shopee 1 chút để ủng hộ shop<br>
+      (không cần mua hàng)<br><br>
+
+      ⏳ Sau 5 giây quay lại đây,<br>
+      bạn sẽ xem được <b>phim full</b> 🎬
+    </p>
+
+    <button class="btn" onclick="goShopee()">Tiếp tục</button>
+  </div>
+</div>
+
+<!-- VIDEO CARD -->
+<div class="card" id="card">
+
+  <button class="close" onclick="closeCard()">✖</button>
+
+  <div class="video-wrap">
+
+    <button class="play-btn" onclick="playVideo()">▶ Xem video</button>
+
+    <iframe id="videoFrame" allow="autoplay"></iframe>
+
+  </div>
+
+</div>
+
+<script>
+
+// 👉 Click Shopee
+function goShopee(){
+  window.open("https://shopee.vn","_blank");
+
+  document.getElementById("popup").style.display="none";
+
+  // 👉 5s sau hiện video
+  setTimeout(()=>{
+    document.getElementById("card").style.display="block";
+  },5000);
+}
+
+// 👉 Play video (có tiếng)
+function playVideo(){
+  document.getElementById("videoFrame").src =
+  "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+
+  document.querySelector(".play-btn").style.display="none";
+}
+
+// 👉 Đóng video
+function closeCard(){
+  document.getElementById("card").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
