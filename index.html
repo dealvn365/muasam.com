@@ -5,56 +5,99 @@
 <title>Landing Video</title>
 
 <style>
-body{margin:0;background:#000;font-family:sans-serif;}
-.video{position:relative;width:100%;height:100vh;}
+body{
+  margin:0;
+  background:#000;
+  font-family:sans-serif;
+}
+
+/* Video full màn hình */
+.video{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
 .video iframe{
   position:absolute;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   border:0;
-  pointer-events:none;
+  pointer-events:none; /* ❗ chặn click YouTube */
 }
+
+/* Overlay */
 .overlay{
   position:absolute;
-  bottom:20px;
+  bottom:30px;
   width:100%;
   text-align:center;
 }
+
+/* Nút */
 .btn{
-  background:red;
+  background:linear-gradient(90deg,#ff6b6b,#ff3d3d);
   color:white;
   padding:15px 30px;
   border-radius:30px;
+  font-size:18px;
   text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 5px 20px rgba(255,0,0,0.4);
+  animation:pulse 1.5s infinite;
+}
+
+/* Animation */
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="video">
+
+  <!-- VIDEO -->
   <iframe 
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
     allow="autoplay"
     allowfullscreen>
   </iframe>
 
+  <!-- CTA -->
   <div class="overlay">
-    <a href="https://shopee.vn" class="btn">MUA NGAY</a>
+    <a href="https://shopee.vn" class="btn" target="_blank">
+      🔥 MUA NGAY
+    </a>
   </div>
+
 </div>
 
+<!-- SCRIPT AUTO REDIRECT -->
 <script>
-// Random 12–30 giây
-let delay = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
+window.onload = function(){
 
-// Link Shopee
-let link = "https://shopee.vn";
+  // Random từ 12–30 giây
+  let delay = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
 
-// Redirect
-setTimeout(function(){
-    window.location.href = link;
-}, delay);
+  console.log("Redirect sau:", delay);
+
+  let start = Date.now();
+
+  let timer = setInterval(function(){
+    if(Date.now() - start >= delay){
+      window.location.href = "https://shopee.vn";
+      clearInterval(timer);
+    }
+  }, 500);
+
+};
 </script>
 
 </body>
