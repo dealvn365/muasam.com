@@ -23,6 +23,21 @@ body{
   pointer-events:none;
 }
 
+/* NÚT BẬT TIẾNG */
+.sound-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:20;
+  padding:10px 15px;
+  border-radius:20px;
+  border:none;
+  background:#222;
+  color:white;
+  cursor:pointer;
+  display:none;
+}
+
 /* POPUP */
 .popup{
   position:fixed;
@@ -42,27 +57,20 @@ body{
   border-radius:15px;
   text-align:center;
   max-width:320px;
-  box-shadow:0 0 25px rgba(0,0,0,0.6);
 }
 
-.box p{
-  font-size:15px;
-}
-
-/* BUTTON */
 .btn{
   display:inline-block;
   margin-top:15px;
   padding:12px 25px;
-  background:linear-gradient(90deg,#ff6b6b,#ff3d3d);
+  background:red;
   color:white;
   border-radius:30px;
   text-decoration:none;
   font-weight:bold;
-  box-shadow:0 5px 20px rgba(255,0,0,0.4);
 }
 
-/* CARD VIDEO */
+/* CARD */
 .card{
   position:fixed;
   bottom:20px;
@@ -73,8 +81,6 @@ body{
   overflow:hidden;
   display:none;
   z-index:9;
-  box-shadow:0 0 20px rgba(0,0,0,0.6);
-  animation:fadeIn 0.5s ease;
 }
 
 .card iframe{
@@ -85,13 +91,6 @@ body{
 
 .card p{
   padding:10px;
-  font-size:14px;
-}
-
-/* animation */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
 }
 </style>
 
@@ -99,50 +98,67 @@ body{
 
 <body>
 
-<!-- VIDEO NỀN -->
+<!-- VIDEO -->
 <div class="bg">
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0"></iframe>
+  <iframe id="bgVideo"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0">
+  </iframe>
 </div>
 
-<!-- POPUP SHOPEE -->
+<!-- NÚT BẬT TIẾNG -->
+<button class="sound-btn" id="soundBtn" onclick="batTieng()">
+  🔊 Bật tiếng
+</button>
+
+<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="box">
-    <p>🙏 Vui lòng nhấn vào Shopee để ủng hộ shop<br>(không cần mua hàng)</p>
-    <a href="https://shopee.vn" class="btn" target="_blank" onclick="clickShopee()">
-      Đi Shopee
-    </a>
+    <p>🙏 Nhấn Shopee để ủng hộ shop (không cần mua)</p>
+    <button class="btn" onclick="clickShopee()">Đi Shopee</button>
   </div>
 </div>
 
-<!-- CARD VIDEO -->
+<!-- CARD -->
 <div class="card" id="card">
-  <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1"></iframe>
-  <p>🎬 Video hấp dẫn – Xem ngay</p>
+  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"></iframe>
+  <p>🎬 Video hấp dẫn</p>
 </div>
 
 <script>
 
-// kiểm tra đã click chưa
-let done = localStorage.getItem("clicked_shopee");
-
-// nếu đã click → không hiện popup
-if(done){
-  document.getElementById("popup").style.display = "none";
+// nếu đã click rồi
+if(localStorage.getItem("clicked")){
+  document.getElementById("popup").style.display="none";
   showCard();
 }
 
-// khi click Shopee
+// click Shopee
 function clickShopee(){
-  localStorage.setItem("clicked_shopee","true");
+  localStorage.setItem("clicked","true");
 
-  // sau 10s hiện card
+  window.open("https://shopee.vn","_blank");
+
+  document.getElementById("popup").style.display="none";
+
   setTimeout(showCard,10000);
 }
 
 // hiện card
 function showCard(){
-  document.getElementById("card").style.display = "block";
+  document.getElementById("card").style.display="block";
 }
+
+// bật tiếng
+function batTieng(){
+  let iframe = document.getElementById("bgVideo");
+  iframe.src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=1";
+  document.getElementById("soundBtn").style.display="none";
+}
+
+// hiện nút bật tiếng sau 3s
+setTimeout(()=>{
+  document.getElementById("soundBtn").style.display="block";
+},3000);
 
 </script>
 
